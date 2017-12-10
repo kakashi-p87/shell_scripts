@@ -15,6 +15,11 @@ echo "====>install git";
 apt-get -y install git;
 echo "====>done";
 
+echo "====>install sudo";
+apt-get -y install sudo;
+echo "kakashi ALL=(ALL:ALL) ALL" >> /etc/sudoers;
+
+
 echo "====>install ssh"
 apt-get -y install openssh-server;
 echo "====>done";
