@@ -6,9 +6,15 @@ echo "###########################################";
 echo "#		       Sources Configuration       		#";
 echo "###########################################";
 
+debian_ver=`lsb_release -c -s`;
+
 sed -i '/cdrom/ s/#*//' /etc/apt/sources.list;
 sed -i '/cdrom/ s/^/#/' /etc/apt/sources.list;
-echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list;
+echo "deb http://deb.debian.org/debian/ $debian_ver main contrib" >> /etc/apt/sources.list;
+echo "deb-src http://deb.debian.org/debian/ $debian_ver main contrib" >> /etc/apt/sources.list;
+#echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list;
+apt-get -y -f install software-properties-common;
+#add-apt-repository "deb http://ppa.launchpad.net/webupd8team/java/ubuntu xenial main";
 wget -q -O - http://dl.google.com/linux/linux_signing_key.pub | apt-key add -;
 
 echo "===========================================";
@@ -60,9 +66,10 @@ echo "#		       google-chrome-stable           #";
 echo "===========================================";
 
 
-apt-get -y -f install software-properties-common;
-add-apt-repository "deb http://ppa.launchpad.net/webupd8team/java/ubuntu xenial main";
-apt-get update;
+
+
+
+####
 apt-get -y install oracle-java8-installer;
 #update-alternatives --config java
 #update-alternatives --config command
