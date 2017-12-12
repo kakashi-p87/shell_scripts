@@ -27,8 +27,8 @@ if [ -f ${java_directory}${java_file} ]; then
   sudo rm ${java_directory}${java_file};
 fi
 
-sudo update-alternatives --install /usr/bin/java java /opt/java/jdk-9.0.1/bin/java 100;
-sudo update-alternatives --install /usr/bin/java javac /opt/java/jdk-9.0.1/bin/javac 100;
+sudo update-alternatives --install /usr/bin/java java ${java_directory}${jdk_directory}/bin/java 100;
+sudo update-alternatives --install /usr/bin/javac javac ${java_directory}${jdk_directory}/bin/javac 100;
 
 sudo update-alternatives --config java;
 sudo update-alternatives --config javac;
@@ -36,6 +36,6 @@ sudo update-alternatives --config javac;
 echo `java -version`;
 echo `javac -version`;
 
-sudo echo >> 'JAVA_HOME="${java_directory}${jdk_directory}"' >> /etc/enviroment;
+sudo echo >> "JAVA_HOME='${java_directory}${jdk_directory}'"" >> /etc/enviroment;
 source /etc/enviroment;
 echo $JAVA_HOME;
