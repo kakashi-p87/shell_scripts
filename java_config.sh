@@ -1,4 +1,6 @@
-
+echo "###################################################";
+echo "#		       Java Configuration     	#";
+echo "###################################################";
 java_directory="/opt/java/";
 jdk_directory="jdk-9.0.1/";
 java_file="jdk-9.0.1_linux-x64_bin.tar.gz";
@@ -25,16 +27,12 @@ fi
 sudo update-alternatives --install /usr/bin/java java /opt/java/jdk-9.0.1/bin/java 100;
 sudo update-alternatives --install /usr/bin/java javac /opt/java/jdk-9.0.1/bin/javac 100;
 
-update-alternatives --config java;
-update-alternatives --config javac;
+sudo update-alternatives --config java;
+sudo update-alternatives --config javac;
 
 echo `java -version`;
 echo `javac -version`;
 
-####
-#apt-get -y install oracle-java8-installer;
-#update-alternatives --config java
-#update-alternatives --config command
-#echo >> 'JAVA_HOME="/usr/lib/jvm/java-8-oracle"' >> /etc/enviroment;
-#source /etc/enviroment;
-#echo $JAVA_HOME;
+sudo echo >> 'JAVA_HOME="${java_directory}${jdk_directory}"' >> /etc/enviroment;
+source /etc/enviroment;
+echo $JAVA_HOME;
