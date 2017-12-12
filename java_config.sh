@@ -30,12 +30,27 @@ fi
 sudo update-alternatives --install /usr/bin/java java ${java_directory}${jdk_directory}/bin/java 100;
 sudo update-alternatives --install /usr/bin/javac javac ${java_directory}${jdk_directory}/bin/javac 100;
 
+echo "###################################################";
+echo "#		       Java Configuration     	#";
+echo "###################################################";
 sudo update-alternatives --config java;
+echo "###################################################";
+echo "#		       javac Configuration     	#";
+echo "###################################################";
 sudo update-alternatives --config javac;
 
+echo "###################################################";
+echo "#		       Java Version     	#";
+echo "###################################################";
 echo `java -version`;
+echo "###################################################";
+echo "#		       Java Compiler Version     	#";
+echo "###################################################";
 echo `javac -version`;
 
-sudo echo >> "JAVA_HOME='${java_directory}${jdk_directory}'" >> /etc/enviroment;
+echo "###################################################";
+echo "#		       JAVA_HOME     	#";
+echo "###################################################";
+sudo echo "JAVA_HOME='${java_directory}${jdk_directory}'" >> /etc/enviroment;
 source /etc/enviroment;
 echo $JAVA_HOME;
