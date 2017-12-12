@@ -51,6 +51,8 @@ echo `javac -version`;
 echo "###################################################";
 echo "#		       JAVA_HOME     	#";
 echo "###################################################";
+sudo chown -R root:${USER};
+sudo chmod -R ug+w /etc/enviroment;
 sudo echo "JAVA_HOME='${java_directory}${jdk_directory}'" >> /etc/enviroment;
 sudo source /etc/enviroment;
 echo $JAVA_HOME;
