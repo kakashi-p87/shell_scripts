@@ -1,7 +1,10 @@
 wget --header "Cookie: oraclelicense=accept-securebackup-cookie" http://download.oracle.com/otn-pub/java/jdk/9.0.1+11/jdk-9.0.1_linux-x64_bin.tar.gz;
-sudo mkdir /opt/java/;
+file_java="/opt/java/";
+if [ -d "$file_java" ]; then
+  sudo mkdir /opt/java/;
+fi
 sudo mv jdk-9.0.1_linux-x64_bin.tar.gz /opt/java/;
-sudo tar -zxf /opt/java/jdk-9.0.1_linux-x64_bin.tar.gz;
+sudo tar -zxf /opt/java/jdk-9.0.1_linux-x64_bin.tar.gz /opt/java/;
 sudo rm /opt/java/jdk-9.0.1_linux-x64_bin.tar.gz;
 
 sudo update-alternatives --install /usr/bin/java java /opt/java/jdk-9.0.1/bin/java 100;
