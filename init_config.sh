@@ -56,7 +56,7 @@ apt-get -y install openssh-server;
 #/etc/init.d/ssh restart
 rm /etc/ssh/ssh_host_*;
 dpkg-reconfigure openssh-server;
-sed -i '/Port/9 sed -i '/Port\ 22/ s/#*//' /etc/ssh/sshd_config;
+sed -i "/Port\ 22/ s/#*//" /etc/ssh/sshd_config;
 echo "===========================================";
 echo "#		       openssh-server                 #";
 echo "===========================================";
@@ -65,15 +65,3 @@ apt-get -y -f install google-chrome-stable;
 echo "===========================================";
 echo "#		       google-chrome-stable           #";
 echo "===========================================";
-
-
-
-
-
-####
-#apt-get -y install oracle-java8-installer;
-#update-alternatives --config java
-#update-alternatives --config command
-#echo >> 'JAVA_HOME="/usr/lib/jvm/java-8-oracle"' >> /etc/enviroment;
-#source /etc/enviroment;
-#echo $JAVA_HOME;
