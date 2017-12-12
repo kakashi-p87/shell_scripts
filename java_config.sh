@@ -1,11 +1,11 @@
 echo "###################################################";
 echo "#		       Java Configuration     	#";
 echo "###################################################";
-java_directory="/opt/java/";
-jdk_directory="jdk-9.0.1/";
-java_file="jdk-9.0.1_linux-x64_bin.tar.gz";
+java_directory="/opt/java";
+jdk_directory="/jdk-9.0.1";
+java_file="/jdk-9.0.1_linux-x64_bin.tar.gz";
 
-wget --header "Cookie: oraclelicense=accept-securebackup-cookie" http://download.oracle.com/otn-pub/java/jdk/9.0.1+11/${java_file};
+wget --header "Cookie: oraclelicense=accept-securebackup-cookie" http://download.oracle.com/otn-pub/java/jdk/9.0.1+11${java_file};
 
 if [ ! -d ${java_directory} ]; then
   sudo mkdir $java_directory;
@@ -36,6 +36,6 @@ sudo update-alternatives --config javac;
 echo `java -version`;
 echo `javac -version`;
 
-sudo echo >> "JAVA_HOME='${java_directory}${jdk_directory}'"" >> /etc/enviroment;
+sudo echo >> "JAVA_HOME='${java_directory}${jdk_directory}'" >> /etc/enviroment;
 source /etc/enviroment;
 echo $JAVA_HOME;
