@@ -52,5 +52,5 @@ echo "###################################################";
 echo "#		       JAVA_HOME     	#";
 echo "###################################################";
 sudo echo "JAVA_HOME='${java_directory}${jdk_directory}'" >> /etc/enviroment;
-source /etc/enviroment;
+sudo source /etc/enviroment;
 echo $JAVA_HOME;
