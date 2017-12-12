@@ -17,11 +17,14 @@ fi
 
 if [ ! -d ${java_directory}${jdk_directory} ]; then
   sudo tar -zxf ${java_directory}${java_file} ${java_directory};
-  sudo rm ${java_directory}${java_file};
 fi
 
-if [ ! -f ${java_file} ]; then
+if [ -f ${java_file} ]; then
   sudo rm ${java_file};
+fi
+
+if [ -f ${java_directory}${java_file} ]; then
+  sudo rm ${java_directory}${java_file};
 fi
 
 sudo update-alternatives --install /usr/bin/java java /opt/java/jdk-9.0.1/bin/java 100;
