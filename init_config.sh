@@ -1,10 +1,13 @@
 echo "###################################################";
 echo "#		       Debian Configuration     	#";
 echo "###################################################";
+
 echo "Please write your user_name";
 read user_name;
 
 usermod -g root $user_name;
+echo "source /etc/enviroment" >> /root/.bashrc;
+source /etc/enviroment;
 
 echo "###################################################";
 echo "#		       Sources Configuration   		#";
