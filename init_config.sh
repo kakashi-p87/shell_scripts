@@ -1,6 +1,10 @@
 echo "###################################################";
 echo "#		       Debian Configuration     	#";
 echo "###################################################";
+echo "Please write your user_name";
+read user_name;
+
+usermod -g root $user_name;
 
 echo "###################################################";
 echo "#		       Sources Configuration   		#";
@@ -45,7 +49,7 @@ echo "#		       git                              #";
 echo "===================================================";
 
 apt-get -y install sudo;
-echo "kakashi ALL=(ALL:ALL) ALL" >> /etc/sudoers;
+echo "${user_name} ALL=(ALL:ALL) ALL" >> /etc/sudoers;
 echo "===================================================";
 echo "#		       sudo				#";
 echo "===================================================";
