@@ -2,7 +2,7 @@ echo "###################################################";
 echo "#		       FTP configuration              #";
 echo "###################################################";
 
-ftp_conf="/etc/vsftp.conf";
+ftp_conf="/etc/vsftpd.conf";
 local_root="/home/${USER}/ftp_home";
 userlist_file="/etc/vsftpd.userlist";
 
@@ -37,8 +37,8 @@ echo "===================================================";
 echo "#		       xinetd configured              #";
 echo "===================================================";
 
-sed -i -e "s/\(listen=\).*/\1NO/" $ftp_conf;
-sed -i -e "s/\(listen_ipv6=\).*/\1NO/" $ftp_conf;
+sudo sed -i -e "s/\(listen=\).*/\1NO/" $ftp_conf;
+sudo sed -i -e "s/\(listen_ipv6=\).*/\1NO/" $ftp_conf;
 echo "no_anon_password=YES" | sudo tee -a $ftp_conf;
 sudo /etc/init.d/xinetd stop;
 
@@ -86,4 +86,4 @@ echo "userlist_deny=NO"                          | sudo tee -a $ftp_conf;
 
 echo "${USER}" | sudo tee -a $userlist_file;
 
-sudo systemctl restart vsftpd;
+echo | sudo systemctl restart vsftpd;
