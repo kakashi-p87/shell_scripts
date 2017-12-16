@@ -7,16 +7,28 @@ local_root="/home/${USER}/ftp_home";
 userlist_file="/etc/vsftpd.userlist";
 
 sudo apt-get update;
-sudo apt-get -y install vsftpd;
+sudo apt-get -f -y install vsftpd;
 echo "===================================================";
 echo "#		       vsftpd installed               #";
 echo "===================================================";
 
-sudo apt-get install xinetd;
+sudo /etc/init.d/vsftpd stop;
+
+echo "===================================================";
+echo "#		       vsftpd stopped              #";
+echo "===================================================";
+
+sudo apt-get -f install xinetd;
 echo "===================================================";
 echo "#		       xinetd installed               #";
 echo "===================================================";
 vsftpd_file="/etc/xinetd.d/vsftpd";
+
+sudo /etc/init.d/xinetd stop;
+
+echo "===================================================";
+echo "#		       xinetd stopped              #";
+echo "===================================================";
 
 echo "service ftp" 					                      | sudo tee -a $vsftpd_file;
 echo "{"					                              	| sudo tee -a $vsftpd_file;
@@ -37,15 +49,6 @@ echo "===================================================";
 echo "#		       xinetd configured              #";
 echo "===================================================";
 
-sudo sed -i -e "s/\(listen=\).*/\1NO/" $ftp_conf;
-sudo sed -i -e "s/\(listen_ipv6=\).*/\1NO/" $ftp_conf;
-echo "no_anon_password=YES" | sudo tee -a $ftp_conf;
-sudo /etc/init.d/xinetd stop;
-
-echo "===================================================";
-echo "#		       xinetd stopped              #";
-echo "===================================================";
-
 sudo /etc/init.d/xinetd start;
 
 echo "===================================================";
@@ -62,13 +65,17 @@ echo "===================================================";
 echo "#		       ftp installed                  #";
 echo "===================================================";
 
-sudo cp $ftp_conf /etc/vsftp.conf.orig;
+sudo cp $ftp_conf /etc/vsftpd.conf.orig;
 sudo mkdir $local_root;
 sudo chown nobody:nogroup $local_root;
 sudo chmod a-w $local_root;
 
 sudo mkdir ${local_root}/files;
 sudo chown ${USER}:${USER} ${local_root}/files;
+
+#sudo sed -i -e "s/\(listen=\).*/\1NO/" $ftp_conf;
+#sudo sed -i -e "s/\(listen_ipv6=\).*/\1NO/" $ftp_conf;
+#echo "no_anon_password=YES" | sudo tee -a $ftp_conf;
 
 sudo sed -i "/write_enable=/ s/#*//" $ftp_conf;
 sudo sed -i "/chroot_local_user=/ s/#*//" $ftp_conf;
@@ -86,4 +93,26 @@ echo "userlist_deny=NO"                          | sudo tee -a $ftp_conf;
 
 echo "${USER}" | sudo tee -a $userlist_file;
 
-echo | sudo systemctl restart vsftpd;
+sudo /etc/init.d/vsftpd restart;
+
+sudo openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout /etc/ssl/private/vsftpd.pem -out /etc/ssl/private/vsftpd.pem;
+
+sudp sed -i '/rsa_cert_file=/ s/^/#/'         $ftp_conf;
+sudo sed -i '/rsa_private_key_file=/ s/^/#/'  $ftp_conf;
+sudo sed -i -e "s/\(ssl_enable=\).*/\1YES/"   $ftp_conf;
+
+
+echo "rsa_cert_file=/etc/ssl/private/vsftpd.pem"         | sudo tee -a $ftp_conf;
+echo "rsa_private_key_file=/etc/ssl/private/vsftpd.pem"  | sudo tee -a $ftp_conf;
+echo "allow_anon_ssl=NO"                                 | sudo tee -a $ftp_conf;
+echo "force_local_data_ssl=YES"                          | sudo tee -a $ftp_conf;
+echo "force_local_logins_ssl=YES"                        | sudo tee -a $ftp_conf;
+echo "ssl_tlsv1=YES"                                     | sudo tee -a $ftp_conf;
+echo "ssl_sslv2=NO"                                      | sudo tee -a $ftp_conf;
+echo "ssl_sslv3=NO"                                      | sudo tee -a $ftp_conf;
+echo "require_ssl_reuse=NO"                              | sudo tee -a $ftp_conf;
+echo "ssl_ciphers=HIGH"                                  | sudo tee -a $ftp_conf;
+
+
+sudo /etc/init.d/vsftpd restart;
+sudo /etc/init.d/xinetd restart;
