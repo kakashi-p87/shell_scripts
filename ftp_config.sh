@@ -53,10 +53,10 @@ echo "#		       ftp installed                  #";
 echo "===========================================";
 
 echo "=======================> adding  admin user";
-sudo echo ${USER} > /etc/vsftpd.userlist;
+sudo echo ${USER} | tee -a /etc/vsftpd.userlist;
 
 vsftpd_conf=/etc/vsftpd.conf;
-sudo echo "userlist_file=/etc/vsftpd.userlist"		>> $vsftpd_conf;
-sudo echo "userlist_enable=YES"				          >> $vsftpd_conf;
-sudo echo "userlist_deny=NO"					            >> $vsftpd_conf;
-sudo echo "local_root=/home/kakashi/ftp"			    >> $vsftpd_conf;
+echo "userlist_file=/etc/vsftpd.userlist"		| tee -a $vsftpd_conf;
+echo "userlist_enable=YES"				          | tee -a $vsftpd_conf;
+echo "userlist_deny=NO"					            | tee -a $vsftpd_conf;
+echo "local_root=/home/kakashi/ftp"			    | tee -a $vsftpd_conf;

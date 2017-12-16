@@ -1,35 +1,35 @@
 echo "###################################################";
-echo "#		       Debian Configuration     	#";
+echo "#		             Debian Configuration     	      #";
 echo "###################################################";
 
 echo "Please write your user_name";
 read user_name;
 
-usermod -g root $user_name;
-echo "source /etc/enviroment" >> /root/.bashrc;
+usermod -aG root $user_name;
+echo "source /etc/enviroment" | tee -a /root/.bashrc;
 source /etc/enviroment;
 
 echo "###################################################";
-echo "#		       Sources Configuration   		#";
+echo "#		             Sources Configuration   		      #";
 echo "###################################################";
 
 debian_ver=`lsb_release -c -s`;
 
 sed -i '/cdrom/ s/#*//' /etc/apt/sources.list;
 sed -i '/cdrom/ s/^/#/' /etc/apt/sources.list;
-echo "deb http://deb.debian.org/debian/ $debian_ver main contrib" >> /etc/apt/sources.list;
-echo "deb-src http://deb.debian.org/debian/ $debian_ver main contrib" >> /etc/apt/sources.list;
+echo "deb http://deb.debian.org/debian/ $debian_ver main contrib" | tee -a /etc/apt/sources.list;
+echo "deb-src http://deb.debian.org/debian/ $debian_ver main contrib" | tee -a /etc/apt/sources.list;
 #echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list;
 apt-get -y -f install software-properties-common;
 #add-apt-repository "deb http://ppa.launchpad.net/webupd8team/java/ubuntu xenial main";
 wget -q -O - http://dl.google.com/linux/linux_signing_key.pub | apt-key add -;
 
-echo "==================================================";
-echo "#		       Sources Configuration		#";
-echo "==================================================";
+echo "===================================================";
+echo "#		             Sources Configuration		        #";
+echo "===================================================";
 
 echo "###################################################";
-echo "#		       apt-get update           	#";
+echo "#		                 apt-get update           	  #";
 echo "###################################################";
 
 apt update;
@@ -38,23 +38,23 @@ apt-get upgrade;
 
 apt-get -y install build-essential;
 echo "===================================================";
-echo "#		       build-essential			#";
+echo "#		               build-essential			          #";
 echo "===================================================";
 
 apt-get -f net-tools;
-echo "===========================================";
-echo "#		       net-tools                #";
-echo "===========================================";
+echo "===================================================";
+echo "#		                 net-tools                    #";
+echo "===================================================";
 
 apt-get -y install git;
 echo "===================================================";
-echo "#		       git                              #";
+echo "#		                   git                        #";
 echo "===================================================";
 
 apt-get -y install sudo;
-echo "${user_name} ALL=(ALL:ALL) ALL" >> /etc/sudoers;
+echo "${user_name} ALL=(ALL:ALL) ALL" | tee -a /etc/sudoers;
 echo "===================================================";
-echo "#		       sudo				#";
+echo "#		       			       sudo                       #";
 echo "===================================================";
 
 
@@ -64,11 +64,16 @@ apt-get -y install openssh-server;
 rm /etc/ssh/ssh_host_*;
 dpkg-reconfigure openssh-server;
 sed -i "/Port\ 22/ s/#*//" /etc/ssh/sshd_config;
-echo "===========================================";
-echo "#		       openssh-server                 #";
-echo "===========================================";
+echo "===================================================";
+echo "#		               openssh-server                 #";
+echo "===================================================";
 
 apt-get -y -f install google-chrome-stable;
-echo "===========================================";
-echo "#		       google-chrome-stable           #";
-echo "===========================================";
+echo "===================================================";
+echo "#     		       google-chrome-stable             #";
+echo "===================================================";
+
+mkdir /home/${user_name}/Source;
+chown -R $user_name:$user_name /home/${user_name}/Source;
+
+git clone https://github.com/kakashi-p87/shell_scripts.git /home/${user_name}/Source;

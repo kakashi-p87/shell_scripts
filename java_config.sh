@@ -1,5 +1,5 @@
 echo "###################################################";
-echo "#		       Java Configuration     	#";
+echo "#		               Java Configuration     	      #";
 echo "###################################################";
 java_directory="/opt/java";
 jdk_directory="/jdk-9.0.1";
@@ -31,29 +31,32 @@ sudo update-alternatives --install /usr/bin/java java ${java_directory}${jdk_dir
 sudo update-alternatives --install /usr/bin/javac javac ${java_directory}${jdk_directory}/bin/javac 100;
 
 echo "###################################################";
-echo "#		       Java Configuration     	#";
+echo "#		             Java Configuration               #";
 echo "###################################################";
 sudo update-alternatives --config java;
 echo "###################################################";
-echo "#		       javac Configuration     	#";
+echo "#		             javac Configuration   	          #";
 echo "###################################################";
 sudo update-alternatives --config javac;
 
 echo "###################################################";
-echo "#		       Java Version     	#";
+echo "#		                 Java Version     	          #";
 echo "###################################################";
 echo `java -version`;
 echo "###################################################";
-echo "#		       Java Compiler Version     	#";
+echo "#		            Java Compiler Version     	      #";
 echo "###################################################";
 echo `javac -version`;
 
 echo "###################################################";
-echo "#		       JAVA_HOME     	#";
+echo "#		                  JAVA_HOME     	            #";
 echo "###################################################";
-sudo chown -R root:${USER} /etc/enviroment;
-sudo chmod -R g+w /etc/enviroment;
-sudo echo "JAVA_HOME='${java_directory}${jdk_directory}'" >> /etc/enviroment;
-sudo echo "source /etc/enviroment" >> ~/.bashrc;
+#sudo chown -R root:${USER} /etc/enviroment;
+#sudo chmod -R g+w /etc/enviroment;
+echo "JAVA_HOME='${java_directory}${jdk_directory}'" | tee -a /etc/enviroment;
+sudo echo "source /etc/enviroment" | tee -a ~/.bashrc;
 sudo -s source /etc/enviroment;
-echo $JAVA_HOME;
+echo "===================================================";
+echo "#		                  JAVA_HOME     	            #";
+echo "#                     $JAVA_HOME                  #";
+echo "===================================================";
