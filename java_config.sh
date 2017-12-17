@@ -5,25 +5,27 @@ java_directory="/opt/java";
 jdk_directory="/jdk-9.0.1";
 java_file="/jdk-9.0.1_linux-x64_bin.tar.gz";
 
+if [ ! -d "${java_file}" ]; then
 wget --header "Cookie: oraclelicense=accept-securebackup-cookie" http://download.oracle.com/otn-pub/java/jdk/9.0.1+11${java_file};
+fi
 
-if [ ! -d ${java_directory} ]; then
+if [ ! -d "${java_directory}" ]; then
   sudo mkdir $java_directory;
 fi
 
-if [ ! -f ${java_directory}${java_file} ]; then
+if [ ! -f "${java_directory}${java_file}" ]; then
   sudo mv ${java_file} ${java_directory};
 fi
 
-if [ ! -d ${java_directory}${jdk_directory} ]; then
+if [ ! -d "${java_directory}${jdk_directory}" ]; then
   sudo tar -zxf ${java_directory}${java_file} ${java_directory};
 fi
 
-if [ -f ${java_file} ]; then
+if [ -f "${java_file}" ]; then
   sudo rm ${java_file};
 fi
 
-if [ -f ${java_directory}${java_file} ]; then
+if [ -f "${java_directory}${java_file}" ]; then
   sudo rm ${java_directory}${java_file};
 fi
 
