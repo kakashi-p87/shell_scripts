@@ -3,34 +3,34 @@ echo "#		               Java Configuration     	      #";
 echo "###################################################";
 java_directory="/opt/java";
 jdk_directory="/jdk-9.0.1";
-java_file="/jdk-9.0.1_linux-x64_bin.tar.gz";
+java_file="jdk-9.0.1_linux-x64_bin.tar.gz";
 
-if [ ! -d "${java_file}" ]; then
-wget --header "Cookie: oraclelicense=accept-securebackup-cookie" http://download.oracle.com/otn-pub/java/jdk/9.0.1+11${java_file};
+if [ ! -d "$java_file" ]; then
+wget --header "Cookie: oraclelicense=accept-securebackup-cookie" http://download.oracle.com/otn-pub/java/jdk/9.0.1+11/$java_file;
 fi
 
-if [ ! -d "${java_directory}" ]; then
+if [ ! -d "$java_directory" ]; then
   sudo mkdir $java_directory;
 fi
 
-if [ ! -f "${java_directory}${java_file}" ]; then
-  sudo mv ${java_file} ${java_directory};
+if [ ! -f "$java_directory/$java_file" ]; then
+  sudo mv $java_file $java_directory;
 fi
 
-if [ ! -d "${java_directory}${jdk_directory}" ]; then
-  sudo tar -zxf ${java_directory}${java_file} ${java_directory};
+if [ ! -d "$java_directory$jdk_directory" ]; then
+  sudo tar -zxf "$java_directory/$java_file" $java_directory;
 fi
 
-if [ -f "${java_file}" ]; then
-  sudo rm ${java_file};
+#if [ -f "$java_file" ]; then
+#  sudo rm $java_file;
+#fi
+
+if [ -f "$java_directory/$java_file" ]; then
+  sudo rm $java_directory/$java_file;
 fi
 
-if [ -f "${java_directory}${java_file}" ]; then
-  sudo rm ${java_directory}${java_file};
-fi
-
-sudo update-alternatives --install /usr/bin/java java ${java_directory}${jdk_directory}/bin/java 100;
-sudo update-alternatives --install /usr/bin/javac javac ${java_directory}${jdk_directory}/bin/javac 100;
+sudo update-alternatives --install /usr/bin/java java $java_directory$jdk_directory/bin/java 100;
+sudo update-alternatives --install /usr/bin/javac javac $java_directory$jdk_directory/bin/javac 100;
 
 echo "###################################################";
 echo "#		             Java Configuration               #";
@@ -55,7 +55,7 @@ echo "#		                  JAVA_HOME     	            #";
 echo "###################################################";
 #sudo chown -R root:${USER} /etc/enviroment;
 #sudo chmod -R g+w /etc/enviroment;
-echo "JAVA_HOME='${java_directory}${jdk_directory}'" | tee -a /etc/enviroment;
+echo "JAVA_HOME='$java_directory$jdk_directory'" | tee -a /etc/enviroment;
 sudo echo "source /etc/enviroment" | tee -a ~/.bashrc;
 sudo -s source /etc/enviroment;
 echo "===================================================";
