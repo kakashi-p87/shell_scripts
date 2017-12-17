@@ -97,7 +97,7 @@ sudo /etc/init.d/vsftpd restart;
 
 sudo openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout /etc/ssl/private/vsftpd.pem -out /etc/ssl/private/vsftpd.pem;
 
-sudp sed -i '/rsa_cert_file=/ s/^/#/'         $ftp_conf;
+sudo sed -i '/rsa_cert_file=/ s/^/#/'         $ftp_conf;
 sudo sed -i '/rsa_private_key_file=/ s/^/#/'  $ftp_conf;
 sudo sed -i -e "s/\(ssl_enable=\).*/\1YES/"   $ftp_conf;
 
@@ -116,3 +116,5 @@ echo "ssl_ciphers=HIGH"                                  | sudo tee -a $ftp_conf
 
 sudo /etc/init.d/vsftpd restart;
 sudo /etc/init.d/xinetd restart;
+
+sudo apt-get -y install filezilla;
