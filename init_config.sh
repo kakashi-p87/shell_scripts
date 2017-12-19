@@ -91,7 +91,7 @@ chown -R $user_name:$user_name $repo_dir;
 mkdir "$repo_dir/shell_scripts";
 
 
-git clone https://github.com/kakashi-p87/shell_scripts.git $repo_dir;
+git clone https://github.com/kakashi-p87/shell_scripts.git "$repo_dir/shell_scripts";
 
 
 
