@@ -2,7 +2,7 @@ echo "###################################################";
 echo "#		             Debian Configuration     	      #";
 echo "###################################################";
 
-echo "Please provide your linux\'s user_name";
+echo "Please provide your linux's user_name";
 read user_name;
 
 usermod -aG root $user_name;
@@ -83,14 +83,15 @@ read user_git;
 git config --global user.email $email_git;
 git config --global user.name  $user_git;
 
-repo_dir=/home/$user_name/Repository;
+repo_dir="/home/$user_name/Repository";
 
-mkdir repo_dir;
+mkdir $repo_dir;
 chown -R $user_name:$user_name $repo_dir;
 
-mkdir $repo_dir/shell_scripts
+mkdir "$repo_dir/shell_scripts";
 
-git clone https://github.com/kakashi-p87/shell_scripts.git /home/${user_name}/Source/shell_scripts;
+
+git clone https://github.com/kakashi-p87/shell_scripts.git $repo_dir;
 
 
 

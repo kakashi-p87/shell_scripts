@@ -73,8 +73,8 @@ sudo chmod a-w $local_root;
 sudo mkdir ${local_root}/files;
 sudo chown ${USER}:${USER} ${local_root}/files;
 
-#sudo sed -i -e "s/\(listen=\).*/\1NO/" $ftp_conf;
-#sudo sed -i -e "s/\(listen_ipv6=\).*/\1NO/" $ftp_conf;
+sudo sed -i -e "s/\(listen=\).*/\1NO/" $ftp_conf;
+sudo sed -i -e "s/\(listen_ipv6=\).*/\1NO/" $ftp_conf;
 #echo "no_anon_password=YES" | sudo tee -a $ftp_conf;
 
 sudo sed -i "/write_enable=/ s/#*//" $ftp_conf;
