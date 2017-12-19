@@ -19,7 +19,7 @@ sed -i '/cdrom/ s/#*//' /etc/apt/sources.list;
 sed -i '/cdrom/ s/^/#/' /etc/apt/sources.list;
 echo "deb http://deb.debian.org/debian/ $debian_ver main contrib" | tee -a /etc/apt/sources.list;
 echo "deb-src http://deb.debian.org/debian/ $debian_ver main contrib" | tee -a /etc/apt/sources.list;
-echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" | tee -a /etc/apt/sources.list;
+#echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" | tee -a /etc/apt/sources.list;
 apt-get -y -f install software-properties-common;
 #add-apt-repository "deb http://ppa.launchpad.net/webupd8team/java/ubuntu xenial main";
 wget -q -O - http://dl.google.com/linux/linux_signing_key.pub | apt-key add -;
@@ -73,10 +73,15 @@ echo "===================================================";
 echo "#     		       google-chrome-stable             #";
 echo "===================================================";
 
-mkdir /home/${user_name}/Source;
-chown -R $user_name:$user_name /home/${user_name}/Source;
+repo_dir=/home/$user_name/Repository;
 
-mkdir /home/${user_name}/Source/shell_scripts
-chown -R $user_name:$user_name /home/${user_name}/Source/shell_scripts;
+mkdir repo_dir;
+chown -R $user_name:$user_name $repo_dir;
+
+mkdir $repo_dir/shell_scripts
 
 git clone https://github.com/kakashi-p87/shell_scripts.git /home/${user_name}/Source/shell_scripts;
+
+
+
+chown -R $user_name:$user_name $repo_dir/*

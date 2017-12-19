@@ -16,7 +16,7 @@ if [ ! -d "$java_directory" ]; then
 fi
 
 if [ ! -d "$java_directory$jdk_directory" ]; then
-  sudo tar -C '$java_directory' -f $java_file;
+  sudo tar x -C $java_directory -f $java_file;
   echo "$java_file unzip";
 fi
 
@@ -54,8 +54,8 @@ echo "#		                  JAVA_HOME     	            #";
 echo "###################################################";
 #sudo chown -R root:${USER} /etc/enviroment;
 #sudo chmod -R g+w /etc/enviroment;
-echo "JAVA_HOME='$java_directory$jdk_directory'" | tee -a /etc/enviroment;
-sudo echo "source /etc/enviroment" | tee -a ~/.bashrc;
+echo "JAVA_HOME='$java_directory$jdk_directory'" | sudo tee -a /etc/enviroment;
+echo "source /etc/enviroment" | sudo tee -a ~/.bashrc;
 sudo -s source /etc/enviroment;
 echo "===================================================";
 echo "#		                  JAVA_HOME     	            #";
