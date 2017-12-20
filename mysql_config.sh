@@ -10,10 +10,10 @@ sudo apt-get update;
 
 sudo apt-get install mysql-server;
 
-sudo service mysql status;
+#sudo service mysql status;
 
 sudo service mysql stop;
 
 sudo service mysql start;
 
-sudo apt-get -y install mysql-workbench-community;
+#sudo apt-get -y install mysql-workbench-community;
