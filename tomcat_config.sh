@@ -18,4 +18,3 @@ sudo service tomcat8 restart;
 echo "===================================================";
 echo "#          Tomcat8 configuration finished         #"
 echo "===================================================";
-
