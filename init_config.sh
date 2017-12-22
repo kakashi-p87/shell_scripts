@@ -77,7 +77,7 @@ apt-get -y install git;
 
 echo "please provide your e-mail";
 read email_git;
-echo "please provide your git\'s user name";
+echo "please provide your git's user name";
 read user_git;
 
 git config --global user.email "$email_git";
