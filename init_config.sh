@@ -85,8 +85,8 @@ read email_git;
 echo "please provide your git's user name";
 read user_git;
 
-git config --global user.email "$email_git";
-git config --global user.name  "$user_git";
+git config --global user.email $email_git;
+git config --global user.name  $user_git;
 
 repo_dir="/home/$user_name/Repository";
 
@@ -101,6 +101,9 @@ git clone https://github.com/kakashi-p87/shell_scripts.git "$repo_dir/shell_scri
 
 
 chown -R $user_name:$user_name $repo_dir/*
+
+
+echo `git config --list`;
 
 echo "===================================================";
 echo "#		               git configured                 #";

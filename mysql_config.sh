@@ -16,6 +16,9 @@ sudo apt-get update;
 sudo apt-get install mysql-server;
 rm $repo_mysql;
 
+sudo sed -i '/bind/ s/^/#/' /etc/mysql/mysql.conf.d/mysqld.cnf;
+echo "bind-address=0.0.0.0" | sudo tee -a /etc/mysql/mysql.conf.d/mysqld.cnf
+
 #sudo service mysql status;
 
 sudo service mysql stop;
