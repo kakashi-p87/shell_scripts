@@ -52,8 +52,8 @@ if [ -d "$java_dir" ]; then
 #  sudo rm "$java_directory/$java_file";
 #fi
 
-  sudo update-alternatives --install /usr/bin/java java $java_dir$jdk_dir/bin/java 100;
-  sudo update-alternatives --install /usr/bin/javac javac $java_dir$jdk_dir/bin/javac 100;
+sudo update-alternatives --install /usr/bin/java java $java_dir/$jdk_dir/bin/java 100;
+sudo update-alternatives --install /usr/bin/javac javac $java_dir/$jdk_dir/bin/javac 100;
 
   echo "###################################################";
   echo "#		             Java Configuration               #";
