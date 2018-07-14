@@ -9,6 +9,15 @@ java_file="jdk-8u161-linux-x64.tar.gz";
 
 url_v='http://download.oracle.com/otn-pub/java/jdk/8u161-b12/2f38c3b165be4555a1fa6e98c45e0808/jdk-8u161-linux-x64.tar.gz';
 
+echo "Please provide jdk url, example: " $url_v;
+read url_v;
+
+echo "Please provide tar file name "  $java_file;
+read java_file;
+
+echo "Please provide jdk dir" $jdk_dir;
+read jdk_dir;
+
 if [ ! -f "$java_file" ]; then
   wget --header "Cookie: oraclelicense=accept-securebackup-cookie" $url_v; 
   #http://download.oracle.com/otn-pub/java/jdk/8u161-b12/2f38c3b165be4555a1fa6e98c45e0808/jdk-8u161-linux-x64.tar.gz; 
