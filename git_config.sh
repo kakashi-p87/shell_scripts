@@ -9,6 +9,7 @@ read email_git;
 echo "please provide your git's user name";
 read user_git;
 
+git config --global core.autocrlf true
 git config --global user.email $email_git;
 git config --global user.name  $user_git;
 
