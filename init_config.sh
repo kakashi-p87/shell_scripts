@@ -19,9 +19,9 @@ sed -i '/cdrom/ s/#*//' /etc/apt/sources.list;
 sed -i '/cdrom/ s/^/#/' /etc/apt/sources.list;
 #echo "deb http://deb.debian.org/debian/ $debian_ver main contrib" | tee -a /etc/apt/sources.list;
 #echo "deb-src http://deb.debian.org/debian/ $debian_ver main contrib" | tee -a /etc/apt/sources.list;
-echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" | tee -a /etc/apt/sources.list;
+#echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" | tee -a /etc/apt/sources.list;
+add-apt-repository "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main";
 apt-get -y -f install software-properties-common;
-#add-apt-repository "deb http://ppa.launchpad.net/webupd8team/java/ubuntu xenial main";
 wget -q -O - http://dl.google.com/linux/linux_signing_key.pub | apt-key add -;
 
 echo "===================================================";
