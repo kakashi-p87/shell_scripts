@@ -48,6 +48,7 @@ echo "===================================================";
 
 apt-get -y install sudo;
 echo "${user_name} ALL=(ALL:ALL) ALL" | tee -a /etc/sudoers;
+sudo usermod -aG sudo $user_name;
 echo "===================================================";
 echo "#		       			       sudo                       #";
 echo "===================================================";
