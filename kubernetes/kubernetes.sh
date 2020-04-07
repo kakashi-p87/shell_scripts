@@ -23,3 +23,9 @@ echo ` sudo systemctl status docker.service`;
 echo `sudo systemctl enable kubelet.service`
 echo `sudo systemctl enable docker.service`
 
+curl -Lo minikube https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64 \
+  && chmod +x minikube
+
+sudo cp minikube /usr/local/bin && rm minikube
+
+minikube start

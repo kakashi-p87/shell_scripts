@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app.kubernetes.io/name: jenkins-deployment
+  name: jenkins
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+     app.kubernetes.io/name: jenkins-deployment
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: jenkins-deployment
+    spec:
+      containers:
+      - image: jenkins/jenkins:latest
+        name: jenkins
+        ports:
+        - containerPort: 9500
